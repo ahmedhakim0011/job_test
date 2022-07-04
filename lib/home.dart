@@ -46,15 +46,12 @@ class _HomeState extends State<Home> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text("Hurrah!",
+          const Text("Hurrah!",
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
                 color: Colors.black,
               )),
-          Center(
-            child: user != null ? Image.asset('assets/Saly.png') : Container(),
-          ),
           Column(
             children: [
               const Text(

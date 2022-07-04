@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final firebaseuser = context.watch<User>();
+    final firebaseuser = context.watch<User?>();
     if (firebaseuser != null) {
       return Home();
     }
