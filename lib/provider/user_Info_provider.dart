@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,11 +14,7 @@ class UserInfoProvider with ChangeNotifier {
     await FirebaseFirestore.instance
         .collection('UserWeight')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({
-      'userID': ID,
-      'userWeight': userWeight,
-      'timestamp': DateTime.now()
-    });
+        .set({'userWeight': userWeight, 'timestamp': DateTime.now()});
   }
 
   List<Userinfo> userDataList = [];
@@ -55,7 +49,6 @@ class UserInfoProvider with ChangeNotifier {
 
 // udating data
   void updateUserInfo({
-    String? ID,
     String? userWeight,
     Timestamp? time,
   }) async {
@@ -63,7 +56,7 @@ class UserInfoProvider with ChangeNotifier {
         .collection('UserWeight')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update(
-      {'userID': ID, 'userWeight': userWeight, 'timestamp': DateTime.now()},
+      {'userWeight': userWeight, 'timestamp': DateTime.now()},
     );
   }
 }

@@ -21,12 +21,25 @@ class _MyStatefulWidgetState extends State<SignIn> {
             child: ListView(
               children: <Widget>[
                 Container(
+                  width: 200,
+                  height: 200,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    color: Colors.blue,
+                  ),
+                ),
+                Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
                     child: const Text(
                       'Sign in',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
                     )),
                 Container(
                   padding: const EdgeInsets.all(10),

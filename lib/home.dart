@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:job_test/data.dart';
 import 'package:job_test/model/userInfo.dart';
 import 'package:job_test/provider/user_Info_provider.dart';
 import 'package:provider/provider.dart';
@@ -95,7 +93,8 @@ class _HomeState extends State<Home> {
       child: const Text("Yes"),
       onPressed: () {
         userInfoProvider!.updateUserInfo(
-            userWeight: updateWeightController.text, ID: widget.Id);
+          userWeight: updateWeightController.text,
+        );
 
         Navigator.of(context).pop();
       },

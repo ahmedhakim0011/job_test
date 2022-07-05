@@ -22,21 +22,25 @@ class _MyStatefulWidgetState extends State<SignUp> {
             child: ListView(
               children: <Widget>[
                 Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
-                    child: const Text(
-                      'TutorialKart',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 30),
-                    )),
+                  width: 200,
+                  height: 200,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    color: Colors.blue,
+                  ),
+                ),
                 Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
                     child: const Text(
                       'Sign Up',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
                     )),
                 Container(
                   padding: const EdgeInsets.all(10),
@@ -44,7 +48,7 @@ class _MyStatefulWidgetState extends State<SignUp> {
                     controller: emailTextController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'User Name',
+                      labelText: 'Email',
                     ),
                   ),
                 ),
@@ -56,16 +60,6 @@ class _MyStatefulWidgetState extends State<SignUp> {
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: rePasswordTextController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Retype Password',
                     ),
                   ),
                 ),
@@ -103,7 +97,7 @@ class _MyStatefulWidgetState extends State<SignUp> {
                 Row(
                   // ignore: sort_child_properties_last
                   children: [
-                    Text('Does not have account?'),
+                    const Text('Already have an account?'),
                     TextButton(
                       child: const Text(
                         'Sign in',

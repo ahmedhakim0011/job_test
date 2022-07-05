@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:job_test/provider/user_Info_provider.dart';
 import 'package:job_test/signnig.dart';
 import 'package:job_test/signup.dart';
@@ -12,7 +11,6 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'data.dart';
 import 'home.dart';
 
 // 1
@@ -51,7 +49,6 @@ class MyApp extends StatelessWidget {
           '/signin': (context) => SignIn(),
           '/signup': (context) => SignUp(),
           '/home': (context) => Home(),
-          '/data': (context) => data(),
         },
       ),
     );
