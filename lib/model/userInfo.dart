@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Userinfo {
-  String? Id;
+  String? docid;
   String? userWeight;
   Timestamp? time;
 
-  Userinfo({this.Id, this.userWeight, this.time});
+  Userinfo({this.docid, this.userWeight, this.time});
 }

@@ -9,12 +9,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'authentication_service.dart';
 
 class Home extends StatefulWidget {
+  String? Id;
+  Home({this.Id});
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   TextEditingController weightController = TextEditingController();
+  TextEditingController updateWeightController = TextEditingController();
+
   UserInfoProvider? userInfoProvider;
 
   Function? onDelete;
@@ -41,7 +45,9 @@ class _HomeState extends State<Home> {
     Widget continueButton = TextButton(
       child: const Text("Yes"),
       onPressed: () {
-        userInfoProvider!.reviewCartDataDelte(delete.Id);
+        userInfoProvider!.reviewCartDataDelte(delete.docid);
+
+        Navigator.of(context).pop();
       },
     );
 
@@ -52,6 +58,56 @@ class _HomeState extends State<Home> {
       actions: [
         cancelButton,
         continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  updateDialog(BuildContext context, update) {
+    // set up the buttons
+    Widget textfield = Container(
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: TextFormField(
+        controller: updateWeightController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "please Enter Weight";
+          }
+        },
+        decoration: const InputDecoration(
+            labelText: "Enter Weight",
+            border: OutlineInputBorder(
+                borderSide: BorderSide(
+              color: Colors.blue,
+              width: 2.0,
+            ))),
+      ),
+    );
+
+    Widget svaeButton = TextButton(
+      child: const Text("Yes"),
+      onPressed: () {
+        userInfoProvider!.updateUserInfo(
+            userWeight: updateWeightController.text, ID: widget.Id);
+
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Update"),
+      content: const Text("Would you like to update this weight ?"),
+      actions: [
+        textfield,
+        svaeButton,
       ],
     );
 
@@ -167,7 +223,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             SizedBox(
-              height: 300,
+              height: MediaQuery.of(context).size.height,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: userInfoProvider!.getuserDataList.length,
@@ -228,7 +284,9 @@ class _HomeState extends State<Home> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            updateDialog(context, data);
+                                          },
                                           icon: const Icon(
                                             Icons.edit,
                                           )),

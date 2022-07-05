@@ -1,11 +1,13 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:job_test/model/userInfo.dart';
-import 'package:provider/provider.dart';
 
 class UserInfoProvider with ChangeNotifier {
+  DocumentSnapshot? docid;
+
   void addUserInfo({
     String? ID,
     String? userWeight,
@@ -14,8 +16,6 @@ class UserInfoProvider with ChangeNotifier {
     await FirebaseFirestore.instance
         .collection('UserWeight')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('YourWight')
-        .doc(ID)
         .set({
       'userID': ID,
       'userWeight': userWeight,
@@ -27,14 +27,10 @@ class UserInfoProvider with ChangeNotifier {
   void getUserData() async {
     List<Userinfo> newList = [];
 
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('UserWeight')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('YourWight')
-        .get();
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('UserWeight').get();
     querySnapshot.docs.forEach((element) {
       Userinfo userinfo = Userinfo(
-          Id: element.get('userID'),
           userWeight: element.get('userWeight'),
           time: element.get('timestamp'));
       newList.add(userinfo);
@@ -49,12 +45,10 @@ class UserInfoProvider with ChangeNotifier {
   }
 
 //Delteing Cart //
-  reviewCartDataDelte(userID) {
+  reviewCartDataDelte(ID) {
     FirebaseFirestore.instance
-        .collection('ReviewCartData')
+        .collection('UserWeight')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('YourReviewCart')
-        .doc(userID)
         .delete();
     notifyListeners();
   }
@@ -63,14 +57,13 @@ class UserInfoProvider with ChangeNotifier {
   void updateUserInfo({
     String? ID,
     String? userWeight,
+    Timestamp? time,
   }) async {
     await FirebaseFirestore.instance
         .collection('UserWeight')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('YourWight')
-        .doc(ID)
-        .update({
-      'userWeight': userWeight,
-    });
+        .update(
+      {'userID': ID, 'userWeight': userWeight, 'timestamp': DateTime.now()},
+    );
   }
 }
