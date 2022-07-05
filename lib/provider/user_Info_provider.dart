@@ -19,7 +19,7 @@ class UserInfoProvider with ChangeNotifier {
         .set({
       'userID': ID,
       'userWeight': userWeight,
-      'timeStamp': Timestamp.now()
+      'timestamp': DateTime.now()
     });
   }
 
@@ -36,7 +36,7 @@ class UserInfoProvider with ChangeNotifier {
       Userinfo userinfo = Userinfo(
           Id: element.get('userID'),
           userWeight: element.get('userWeight'),
-          time: element.get('timeStamp'));
+          time: element.get('timestamp'));
       newList.add(userinfo);
     });
 
